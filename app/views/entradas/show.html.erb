@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="page-header">
+                Visualizar Entrada
+            </h2>
+        </div>
+    </div>
+    <div class="curso form">
+
+           <div class="row">
+
+               <div class="col-lg-4 form-group">   
+                  <label class = 'control-label'>Cliente</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.cliente.nome %>" />
+               </div>
+
+           </div>  
+
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Plano</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.plano.nome %>" />
+                </div>
+           </div>  
+
+           <div class="row">
+                <div class="col-lg-4 form-group">   
+                  <label class = 'control-label'>Modalidade</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.modalidade.nome %>" />
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-lg-4 form-group">  
+                  <label class = 'control-label'>Descrição</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.descricao %>" />
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Valor</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.valor %>" />
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Desconto</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.desconto %>" />
+                </div>
+           </div>
+                
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Total</label>
+                  <input readonly="true" class = 'form-control' value="<%= @entrada.total %>" />
+                </div>
+           </div> 
+            
+             <div class="row">
+                <div class="col-lg-4 form-group">  
+                  <%= link_to 'Editar', edit_entrada_path(@entrada), :class => "btn btn-primary" %>
+                  <%= link_to 'Voltar', entradas_path, :class => "btn btn-primary"%>
+                </div>
+            </div>
+     
+                          
+    </div>
+</div>

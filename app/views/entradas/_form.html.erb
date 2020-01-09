@@ -1,0 +1,127 @@
+<%= form_with(model: entrada, local: true) do |form| %>
+  <% if entrada.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(entrada.errors.count, "error") %> prohibited this entrada from being saved:</h2>
+
+      <ul>
+      <% entrada.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-lg-10 form-group">
+  
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :cliente_id, :class => 'control-label' %>
+    <%= form.collection_select :cliente_id, Cliente.order(:nome) , :id, :nome, {:prompt => 'Selecionar'}, :class => 'form-control', :id => 'entrada_cliente_id' %>
+  </div>
+  </div>
+
+   <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :plano_id, :class => 'control-label' %>
+    <%= form.collection_select :plano_id, Plano.order(:nome) , :id, :nome, {:prompt => 'Selecionar'}, :class => 'form-control', :id => 'entrada_plano_id' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :modalidade, :class => 'control-label' %>    
+    <%= form.collection_select :modalidade_id, Modalidade.order(:nome) , :id, :nome, {:prompt => 'Selecionar'}, :class => 'form-control', :id => 'entrada_modalidade_id' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :descricao,"Descrição", :class => 'control-label' %>
+    <%= form.text_field :descricao, id: :entrada_descricao, :class => 'form-control' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-2 form-group">
+    <%= form.label :valor, :class => 'control-label' %>
+    <%= form.number_field :valor, id: :entrada_valor, :class => 'form-control', :readonly =>'true'%>       
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :desconto, :class => 'control-label' %>
+    <%= form.number_field :desconto, id: :entrada_desconto, :class => 'form-control' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-2 form-group">
+    <%= form.label :total, :class => 'control-label' %>
+    <%= form.number_field :total, id: :entrada_total, :class => 'form-control', :readonly =>'true' %>       
+  </div>
+  </div>
+
+
+  <div class="row">
+  <div class="col-lg-7 form-group">  
+      <input type="submit" name="commit" class="btn btn-primary" value="Salvar" data-disable-with="Salvar" />
+      <%= link_to 'Voltar', entradas_path, :class => "btn btn-primary"%>
+  </div>
+  </div>
+
+  </div>
+
+<% end %>
+
+<script type="text/javascript">
+   
+   
+
+   //Calculando o valor total
+   $( "#entrada_desconto" ).keyup(function() {
+       var valor = $("#entrada_valor").val();
+       var desconto = $("#entrada_desconto").val();
+       var total = parseFloat(valor) - parseFloat(desconto);
+
+       if(total > 0){
+          document.getElementById('entrada_total').value = total;
+       }else{
+          alert("Desconto estrapolou o valor total!");
+       }
+       
+   });
+
+ 
+   //SETANDO O VALOR DO PLANO ESCOLHIDO
+      $(document).ready(function(){ 
+
+      $(document).on("change", "#entrada_plano_id", function(){
+
+        var idplano = document.getElementById("entrada_plano_id");
+
+        var valor_selecionado_plano = idplano.options[idplano.selectedIndex].value;
+ 
+         $.ajax({
+         remote: true,
+         dataType:'json',
+         type:'get',
+         url: '/entradas/buscarvalorplano/'+ valor_selecionado_plano,
+         
+         cache: true,
+         processData: true,
+         success: function(data){
+
+              document.getElementById('entrada_valor').value = data[0].valor;        
+
+         }
+
+         });
+
+       });
+      });
+
+ 
+</script>
+
+

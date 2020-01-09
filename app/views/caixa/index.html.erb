@@ -1,0 +1,81 @@
+<p id="notice"><%= notice %></p>
+
+
+
+  <% @i = 0
+    @saldo_e.each do |saldo| 
+    @i=@i+saldo.saldo.to_f
+  %>
+
+  
+ <% 
+ end
+ %>
+
+   <% @e = 0
+    @saldo_s.each do |saldo| 
+    @e=@e+saldo.saldo.to_f
+  %>
+
+  
+ <% 
+ end
+ %>
+
+ <%
+    @saldo_total = @i - @e
+
+ %>
+
+ 
+
+
+
+<h1>Caixa</h1>
+
+
+
+  <table class="table table-hover table-striped" cellpadding="0" cellspacing="0">
+      <thead>
+      <tr>
+             
+      <th colspan="3"></th>
+                      
+      </thead>
+      <tbody>
+    
+      <tr>
+        <td style="font-size: 20px;">Total de Entradas</td>
+        <td style="font-size: 20px;">R$<%= @i %></td>
+        
+      </tr>
+    
+  </tbody>
+
+  <tbody>
+    
+      <tr>
+        <td style="font-size: 20px;">Total de Saídas</td>
+        <td style="font-size: 20px;">R$<%= @e %></td>
+        
+      </tr>
+    
+  </tbody>
+
+  <tbody>
+    
+      <tr>
+        <td style="font-size: 20px;">Saldo em Caixa</td>
+        <td style="font-size: 20px;">R$<%=@saldo_total%></td>
+        
+      </tr>
+    
+  </tbody>
+
+
+  </table>
+
+
+<br>
+
+

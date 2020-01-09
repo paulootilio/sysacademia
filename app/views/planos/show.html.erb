@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="page-header">
+                Visualizar Plano
+            </h2>
+        </div>
+    </div>
+    <div class="curso form">
+
+           <div class="row">
+
+               <div class="col-lg-4 form-group">   
+                  <label class = 'control-label'>Nome</label>
+                  <input readonly="true" class = 'form-control' value="<%= @plano.nome %>" />
+               </div>
+
+           </div>    
+
+           <div class="row">
+                <div class="col-lg-4 form-group">   
+                  <label class = 'control-label'>Referente</label>
+                  <input readonly="true" class = 'form-control' value="<%= @plano.referente %>" />
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Descrição</label>
+                  <input readonly="true" class = 'form-control' value="<%= @plano.descricao %>" />
+                </div>
+           </div>
+                
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Valor</label>
+                  <input readonly="true" class = 'form-control' value="<%= @plano.valor %>" />
+                </div>
+           </div>             
+            
+             <div class="row">
+                <div class="col-lg-4 form-group">  
+                  <%= link_to 'Editar', edit_plano_path(@plano), :class => "btn btn-primary" %>
+                  <%= link_to 'Voltar', planos_path, :class => "btn btn-primary"%>
+                </div>
+            </div>
+     
+                          
+    </div>
+</div>

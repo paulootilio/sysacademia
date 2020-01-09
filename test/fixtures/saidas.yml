@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fornecedor: one
+  modalidade: one
+  descricao: MyString
+  valor: MyString
+
+two:
+  fornecedor: two
+  modalidade: two
+  descricao: MyString
+  valor: MyString

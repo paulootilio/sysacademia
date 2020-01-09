@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cliente:</strong>
+  <%= @treino.cliente.nome %>
+</p>
+
+<p>
+  <strong>Plano:</strong>
+  <%= @treino.plano.nome %>
+</p>
+
+
+<div class="table-responsive">
+  <table class="table table-hover table-striped" cellpadding="0" cellspacing="0">
+     <thead>
+      <th>Exerciício</th>          
+      <th>Série</th>
+      <th>Repetições</th>
+      <th>Carga</th>                                
+     </thead>
+     <tbody>
+         <% @treino.exrciciotreinos.each_with_index do |ex| %>
+          
+         <tr>
+          <td><%= ex.exercicio.nome %> &nbsp; </td>
+          <td><%= ex.exercicio.serie %>&nbsp;</td>
+          <td><%= ex.exercicio.rept %>&nbsp;</td>
+          <td><%= ex.exercicio.carga %>&nbsp;</td>
+            
+             
+         </tr>
+        
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+<%= link_to 'Edit', edit_treino_path(@treino) %> |
+<%= link_to 'Back', treinos_path %>

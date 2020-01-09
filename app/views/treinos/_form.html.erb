@@ -1,0 +1,175 @@
+<div class="treino form">
+<%= form_with(model: treino, local: true, id: "formtreino") do |form| %>
+  <% if treino.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(treino.errors.count, "error") %> prohibited this treino from being saved:</h2>
+
+      <ul>
+      <% treino.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+  <div class="col-lg-4 form-group">  
+    <%= form.label :cliente_id, :class => 'control-label' %>
+    <%= form.collection_select(:cliente_id, Cliente.order(:nome), :id, :nome, {:prompt=> 'Selecionar'}, :class=> "form-control", :id=> "idcliente") %>              
+  </div>
+
+  <div class="col-lg-4 form-group">  
+    <%= form.label :plano_id, :class => 'control-label' %>
+    <%= form.collection_select(:plano_id, Plano.order(:nome), :id, :nome, {:prompt=> 'Selecionar'}, :class=> "form-control", :id=> "idplano") %>              
+  </div>
+
+  <div class="col-md-5 form-group exercicio">
+
+    <label>Exercício</label>
+    <%= select_tag  :exercicio_id,options_from_collection_for_select(Exercicio.all, 'id','nome'), include_blank: "Selecionar", :class => 'form-control', :id => 'exercicio_id' %>
+                    
+    <%= hidden_field_tag "exerciciotamanho", @treino.exrciciotreinos.length  %>                    
+  </div>
+
+  <div class="col-md-2 form-group">
+    <input   type="button"  id="btnadicionarexerc" name="btnAdicionarExerc" value="Incluir Exercício" data-disable-with="Salvar" class="btn btn-primary" />
+  </div>
+
+  </div>
+</div>
+
+  <div class="table-responsive">
+    <table id="myTable" class="table table-hover table-striped" style="margin-top: 30px;">
+      <thead>
+        <tr>                      
+          <th>Exerciício</th>          
+          <th>Série</th>
+          <th>Repetições</th>
+          <th>carga</th>          
+          <th></th>                      
+        </tr>
+      </thead>
+        <tbody>
+          <% 
+            @i = -1
+            @treino.exrciciotreinos.each_with_index do |ex| 
+            @i=@i+1
+         %>                      
+                  <tr>                     
+                     <td id="<%= @i %>"><%= ex.exercicio.id %></td>             
+                     <td><%= ex.exercicio.nome %> &nbsp; </td>
+                     <td><%= ex.exercicio.serie %>&nbsp;</td>
+                     <td><%= ex.exercicio.rept %>&nbsp;</td>
+                     <td><%= ex.exercicio.carga %>&nbsp;</td>                  
+                     <td><button onclick='Remover(this, 1)' class='btn btn-primary'>Remover</button></td>                      
+                  </tr>                
+                 <% end %>
+                    </tbody>
+                  </table>
+                </div>
+
+
+            <div class="row">
+                <div class="col-lg-7 form-group">  
+                  <input type="button" id="btnadicionartreino" name="commit" class="btn btn-primary" value="Salvar" data-disable-with="Salvar" />
+                  <%= link_to 'Voltar', treinos_path, :class => "btn btn-primary"%>
+                </div>
+            </div>
+
+
+     <% 
+      debug(@treino)
+        @i = -1
+        @treino.exrciciotreinos.each_with_index do |ex| 
+        @i=@i+1
+     %>
+
+        <input type="hidden" name="treino[exrciciotreinos_attributes][<%= @i %>][id]" id="<%= @i %>id" value="<%= ex.id %>" />
+        <input type="hidden" name="treino[exrciciotreinos_attributes][<%= @i %>][_destroy]" id="<%= @i %>hidden" value="false" />
+        <% end %>      
+        <% end %>
+
+<script type="text/javascript">
+
+  //Manda os valores digitados para a rota 
+$("#btnadicionartreino").click(function(e){
+    //verificar se foi preenchido tudo
+    var idcliente = document.getElementById("idcliente");
+    var idplano = document.getElementById("idplano");
+  
+    var valor_cliente = idcliente.options[idcliente.selectedIndex].value;
+    var valor_plano = idplano.options[idplano.selectedIndex].value;
+        
+
+    if(valor_cliente != "" && valor_plano != ""){
+      //dando submit
+      document.forms['formtreino'].submit();
+     
+    }else{
+      //toastr.error("Preencha todos os campos!")   
+      alert("Preencha todos os campos!");
+    }
+        
+});
+
+//populando combo box da exercicio
+  $(document).ready(function() {
+      
+
+});
+
+   //botão para incluir a exercicio no treinos
+$("#btnadicionarexerc").click(function(e){
+   var idexercicio = document.getElementById("exercicio_id");
+   var valor_selecionado = idexercicio.options[idexercicio.selectedIndex].value;
+   var possui = 0;
+
+   $('#myTable tbody tr').each(function () {
+      var colunas = $(this).children(); 
+     if(valor_selecionado == $(colunas[0]).text()){  
+          possui = 1;      
+      }      
+   });
+
+   if(possui == 0){
+      $.ajax({
+     remote: true,
+     dataType:'script',
+     type:'get',
+     url: '/treinos/exercicio/'+$('#exercicio_id').val()+'/'+$('#exerciciotamanho').val()
+     })
+   }else{
+      alert("Exercicio já incluido!");
+   }
+
+     
+ });
+
+ function Remover(linha, local){
+
+  //eliminando a linha na tabela
+  var tab = document.getElementById("myTable");
+  var i = linha.parentNode.parentNode.rowIndex;
+  tab.deleteRow(i);
+  console.log(tab);
+  var selecionado = 0;
+
+  //eliminando input para não ser salvo
+  //verificando se esta excluindo do form adicionar ou editar
+  if(local == 1){//form editar
+    selecionado = $(linha).closest("tr").find('td:first').attr('id');
+  }else if(local == 0){//form adicionar
+    selecionado = $('td:nth-child(1)', $(linha).parents('tr')).text();
+  }
+  
+  if(document.getElementById(selecionado+"hidden") != null){
+      document.getElementById(selecionado+"hidden").value="true";
+  }else{
+    $("#"+selecionado).remove();
+
+  }
+  
+}  
+                      
+
+</script>

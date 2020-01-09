@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Academia</title>
+    
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+             
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0; background-color: #005ce6;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+                <!--<a class="navbar-brand" href="index.html" style="color: #fff; margin-left: 600px;">SysOferta</a>-->
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <!-- /.dropdown -->
+               <strong style="color: #fff;">Olá, <%=current_user.nome.to_s %> </strong>
+                <li class="dropdown" style="background-color: #F2F2F2">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+
+                        <li class="divider"></li>
+                        <li><%= link_to('<i class="fa fa-sign-out fa-fw"></i> Sair'.html_safe, destroy_user_session_path, method: :delete) %> 
+                        </li>
+
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+
+                
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+
+           <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse" >
+                    <ul class="nav" id="side-menu">
+                        
+                        <li>
+                            <a href="#"><i class="fa fa-plus-circle fa-fw"></i> Cadastros<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                  <li>
+                                    <a href="/users">Usuários</a>
+                                  </li>   
+                                  <li>
+                                    <a href="/clientes">Clientes</a>
+                                  </li>
+                                  <li>
+                                    <a href="/fornecedors">Fornecedores</a>
+                                  </li>
+                                  <li>
+                                    <a href="/planos">Planos</a>
+                                  </li>
+                                  <li>
+                                    <a href="/modalidades">Modalidades</a>
+                                  </li>
+                                  <li>
+                                    <a href="/treinos">Treinos</a>
+                                  </li>
+                                  <li>
+                                    <a href="/exercicios">Exercícios</a>
+                                  </li>
+                                  
+                                  
+                                  
+                                  
+                            
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-plus-circle fa-fw"></i> Relatórios<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                                  
+                                <li>
+                                    <a href="/entradas/relatorio_entradas">Relatório Entradas</a>
+                                </li>                                   
+                            
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-plus-circle fa-fw"></i> Financeiro<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">                              
+                                  <li>
+                                    <a href="/entradas">Entradas</a>
+                                  </li>
+                                  <!--<li>
+                                    <a href="/periodos">Períodos</a>
+                                  </li>-->
+                                  <li>
+                                    <a href="/saidas">Saidas</a>
+                                  </li>
+                                  <li>
+                                    <a href="/caixa/index">Caixa</a>
+                                  </li>
+                                  
+                                  
+                            
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        
+                                  
+            
+                            
+                            </ul>
+                        
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <!-- /.col-lg-12 -->
+                </div>
+
+                <!-- /.row -->
+            </div>
+                       
+           
+            <%= yield %>
+
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    
+
+</body>
+
+</html>
+

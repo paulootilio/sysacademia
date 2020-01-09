@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: MyString
+  serie: 1
+  rept: MyString
+  carga: MyString
+
+two:
+  nome: MyString
+  serie: 1
+  rept: MyString
+  carga: MyString

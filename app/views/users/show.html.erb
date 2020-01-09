@@ -1,0 +1,40 @@
+<h1>Exibir Usuário</h1>
+
+
+<div class="bairro form">
+
+
+  <div class="row">
+                <div class="col-lg-4 form-group">   
+                  <label class= 'control-label'>Nome</label>
+                  <input readonly="true" class = 'form-control' value="<%= @user.nome %>" />
+                </div>         
+                            
+                <div class="col-lg-4 form-group">   
+                   <label class= 'control-label'>Email</label>
+                  <input readonly="true" class = 'form-control' value="<%= @user.email %>" />
+                </div>
+            </div>
+      <div class="row">
+                
+              <div class="col-lg-4 form-group">   
+                   <label class= 'control-label'>Tipo</label>
+                  <input readonly="true" class = 'form-control' value="<%= @user.tipo %>" />
+                </div>
+
+                
+
+
+      </div>
+
+ 
+  <div class="row">
+                <div class="col-lg-4 form-group">  
+                  <%= link_to 'Editar', edit_user_path(@user), :class => "btn btn-primary" %>
+                  
+                  <%= link_to 'Voltar', users_path, :class => "btn btn-primary"%>
+                  
+                </div>
+            </div>
+
+</div>

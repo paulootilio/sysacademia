@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2 class="page-header">
+                Visualizar Saída
+            </h2>
+        </div>
+    </div>
+    <div class="curso form">
+
+           <div class="row">
+
+               <div class="col-lg-4 form-group">   
+                  <label class = 'control-label'>Fornecedor</label>
+                  <input readonly="true" class = 'form-control' value="<%= @saida.fornecedor.nome %>" />
+               </div>
+
+           </div>    
+
+           <div class="row">
+                <div class="col-lg-4 form-group">   
+                  <label class = 'control-label'>Modalidade</label>
+                  <input readonly="true" class = 'form-control' value="<%= @saida.modalidade.nome %>" />
+                </div>
+           </div>
+
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Descrição</label>
+                  <input readonly="true" class = 'form-control' value="<%= @saida.descricao %>" />
+                </div>
+           </div>
+                
+           <div class="row">
+                <div class="col-lg-2 form-group">  
+                  <label class = 'control-label'>Valor</label>
+                  <input readonly="true" class = 'form-control' value="<%= @saida.valor %>" />
+                </div>
+           </div>             
+            
+             <div class="row">
+                <div class="col-lg-4 form-group">  
+                  <%= link_to 'Editar', edit_saida_path(@saida), :class => "btn btn-primary" %>
+                  <%= link_to 'Voltar', saidas_path, :class => "btn btn-primary"%>
+                </div>
+            </div>
+     
+                          
+    </div>
+</div>

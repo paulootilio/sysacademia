@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cliente: one
+  plano: one
+  modalidade: one
+  descricao: MyString
+  valor: 1.5
+  desconto: 1.5
+  total: 1.5
+
+two:
+  cliente: two
+  plano: two
+  modalidade: two
+  descricao: MyString
+  valor: 1.5
+  desconto: 1.5
+  total: 1.5

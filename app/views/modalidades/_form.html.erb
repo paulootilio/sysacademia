@@ -1,0 +1,55 @@
+<%= form_with(model: modalidade, local: true) do |form| %>
+  <% if modalidade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(modalidade.errors.count, "error") %> prohibited this modalidade from being saved:</h2>
+
+      <ul>
+      <% modalidade.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-lg-10 form-group">
+  
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :nome, :class => 'control-label' %>
+    <%= form.text_field :nome, id: :modalidade_nome, :class => 'form-control' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :descricao, :class => 'control-label' %>
+    <%= form.text_field :descricao, id: :modalidade_descricao, :class => 'form-control' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-2 form-group">
+    <%= form.label :receita, :class => 'control-label' %>
+    <%= form.check_box :receita, id: :modalidade_receita %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-2 form-group">
+    <%= form.label :despesa, :class => 'control-label' %>
+    <%= form.check_box :despesa, id: :modalidade_despesa %>
+  </div>
+  </div>
+
+
+  <div class="row">
+  <div class="col-lg-7 form-group">  
+      <input type="submit" name="commit" class="btn btn-primary" value="Salvar" data-disable-with="Salvar" />
+      <%= link_to 'Voltar', modalidades_path, :class => "btn btn-primary"%>
+  </div>
+  </div>
+
+  </div>
+
+<% end %>
+

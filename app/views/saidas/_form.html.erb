@@ -1,0 +1,57 @@
+<%= form_with(model: saida, url: createuser_users_path, local: true) do |form| %>
+  <% if saida.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(saida.errors.count, "error") %> prohibited this entrada from being saved:</h2>
+
+      <ul>
+      <% saida.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="col-lg-10 form-group">
+  
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :fornecedor_id, :class => 'control-label' %>
+    <%= form.collection_select :fornecedor_id, Fornecedor.order(:nome) , :id, :nome, {:prompt => 'Selecionar'}, :class => 'form-control', :id => 'saida_fornecedor_id' %>
+  </div>
+  </div>
+
+   <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :modalidade_id, :class => 'control-label' %>
+    <%= form.collection_select :modalidade_id, Modalidade.order(:nome) , :id, :nome, {:prompt => 'Selecionar'}, :class => 'form-control', :id => 'saida_modalidade_id' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-5 form-group">
+    <%= form.label :descricao,"Descrição", :class => 'control-label' %>
+    <%= form.text_field :descricao, id: :saida_descricao, :class => 'form-control' %>
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-2 form-group">
+    <%= form.label :valor,'Valor Total', :class => 'control-label' %>
+    <%= form.number_field :valor, id: :saida_valor, :class => 'form-control' %>       
+  </div>
+  </div>
+
+  <div class="row">
+  <div class="col-lg-7 form-group">  
+      <input type="submit" name="commit" class="btn btn-primary" value="Salvar" data-disable-with="Salvar" />
+      <%= link_to 'Voltar', saidas_path, :class => "btn btn-primary"%>
+  </div>
+  </div>
+
+  </div>
+
+<% end %>
+
+
+
+
